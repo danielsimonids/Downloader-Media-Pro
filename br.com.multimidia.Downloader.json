@@ -1,0 +1,41 @@
+{
+    "app-id": "br.com.multimidia.Downloader",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "23.08",
+    "sdk": "org.freedesktop.Sdk",
+    "command": "downloader-launch",
+    "finish-args": [
+        "--socket=x11",
+        "--share=ipc",
+        "--socket=wayland",
+        "--share=network",
+        "--filesystem=host"
+    ],
+    "modules": [
+        {
+            "name": "openjdk",
+            "buildsystem": "simple",
+            "build-commands": [
+                "echo 'Usando OpenJDK fornecido pelo SDK/Runtime'"
+            ]
+        },
+        {
+            "name": "downloader-app",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -Dm755 run.sh /app/bin/downloader-launch",
+                "install -Dm644 Downloader-Media-Pro.jar /app/share/downloader/Downloader-Media-Pro.jar"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "flatpak-files/run.sh"
+                },
+                {
+                    "type": "file",
+                    "path": "Downloader-Media-Pro.jar"
+                }
+            ]
+        }
+    ]
+}
